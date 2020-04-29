@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Routing from '@routes/Routing';
 
 const root = document.getElementById('root');
 
-ReactDOM.render(<App />, root);
+ReactDOM.render(<Routing />, root);

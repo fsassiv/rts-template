@@ -1,62 +1,45 @@
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  entry: {
-    app: path.join(__dirname, 'src', 'index.tsx'),
+  entry: './src/index.tsx',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
-  target: 'web',
-  resolve: { extensions: ['.ts', '.tsx', '.js'] },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: '/node_modules/',
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+        },
       },
       {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
-          },
-          'css-loader',
-          'sass-loader',
-        ],
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
-  output: {
-    filename: 'bundle.min.js',
-    path: path.resolve(__dirname, 'dist'),
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@pages': path.join(__dirname, './src/pages'),
+      '@routes': path.join(__dirname, './src/routes'),
+    },
   },
   devServer: {
-    contentBase: './',
-    port: 5000,
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new UglifyJsPlugin({
-        test: /\.js(\?.*)?$/i,
-        exclude: /node_modules/,
-      }),
-      new OptimizeCSSAssetsPlugin(),
-    ],
+    historyApiFallback: true,
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.min.css',
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
     }),
   ],
 };
