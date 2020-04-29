@@ -37,7 +37,6 @@ module.exports = {
     filename: 'bundle.min.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devtool: 'source-map',
   devServer: {
     contentBase: './',
     port: 5000,
