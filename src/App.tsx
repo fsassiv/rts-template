@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import "./App.scss";
+import React,{useEffect} from 'react';
+import './App.scss';
 
-export default class App extends Component {
-  render() {
-    return <div>Hello world</div>;
-  }
-}
+const App = () => {
+    useEffset(()=>{
+      console.log("Hello")
+    },[]);
+  return(<div>Hello world</div>)};
+
+export default App;
