@@ -27,7 +27,7 @@ npm run test
 👤 **Flavio + Felipe**
 
 * Github Felipe: [@felipevlima](https://github.com/felipevlima)
-* Github Flavio: [@felipevlima](https://github.com/felipevlima)
+* Github Flavio: [@flavio](https://github.com/felipevlima)
 
 ## Show your support
 
