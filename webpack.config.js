@@ -29,6 +29,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
+      '@pages': path.join(__dirname, './src/pages'),
       '@routes': path.join(__dirname, './src/routes'),
     },
   },

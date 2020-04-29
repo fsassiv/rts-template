@@ -1,7 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// import { Container } from './styles';
+import Main from '@pages/Main';
 
-export default function Routing() {
-  return <h1>Hello</h1>;
-}
+const Routing: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Main} />
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
+export default Routing;
