@@ -4,15 +4,21 @@
   "description": "Simple React+Typescript template",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "fsa",
   "license": "ISC",
   "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.2.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",
@@ -27,15 +33,11 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "html-webpack-plugin": "^4.2.1",
-    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
