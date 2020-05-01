@@ -11,7 +11,13 @@ module.exports = {
     app: path.join(__dirname, 'src', 'index.tsx'),
   },
   target: 'web',
-  resolve: { extensions: ['.ts', '.tsx', '.js'] },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components/'),
+      '@layout': path.resolve(__dirname, 'src/layout/'),
+    },
+  },
   module: {
     rules: [
       {
