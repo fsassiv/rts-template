@@ -36,10 +36,13 @@ module.exports = {
   output: {
     filename: 'bundle.min.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: './',
   },
+  watch: true,
   devServer: {
     contentBase: './',
     port: 5000,
+    historyApiFallback: true,
   },
   optimization: {
     minimize: true,
