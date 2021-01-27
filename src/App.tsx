@@ -5,7 +5,6 @@ const App = () => {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    console.log('Mounted again');
     setValue('Sinner');
   }, []);
 
