@@ -1,28 +1,25 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-require('dotenv').config();
 
-const stylesLoadresSettings = [
-  'css-loader',
-  'sass-loader',
-  {
-    loader: 'sass-resources-loader',
-    options: {
-      resources: ['./src/styles/base/_variables.scss'],
-    },
-  },
-];
+// ################ OPTIONAL SETTING FOR SCSS ################
 
-const pluginsSettings = [
-  new CleanWebpackPlugin(),
-  new HtmlWebpackPlugin({
-    template: path.join(__dirname, 'src', 'index.html'),
-  }),
-];
+// {
+//   test: /\.(sa|sc|c)ss$/,
+//   use: [
+//     'style-loader',
+//     'css-loader',
+//     'sass-loader',
+//     {
+//       loader: 'sass-resources-loader',
+//       options: {
+//         resources: ['./src/styles/base/_variables.scss', './src/styles/utils/_mixins.scss'],
+//       },
+//     },
+//   ],
+// },
 
 module.exports = {
   mode: 'development',
@@ -37,6 +34,7 @@ module.exports = {
       '@layout': path.resolve(__dirname, 'src/layout/'),
       '@assets': path.resolve(__dirname, 'src/assets/'),
       '@styles': path.resolve(__dirname, 'src/styles/'),
+      '@src': path.resolve(__dirname, 'src/'),
     },
   },
   module: {
@@ -52,25 +50,10 @@ module.exports = {
         exclude: '/node_modules/',
       },
       {
-        test: /\.(sa|sc|c)ss$/,
-        use: process.env.ALL_IN_JS
-          ? [...stylesLoadresSettings]
-          : [
-              {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  hmr: process.env.NODE_ENV === 'development',
-                },
-              },
-              ...stylesLoadresSettings,
-            ],
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
       },
     ],
-  },
-  output: {
-    filename: '[name].[contenthash].bundle.min.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
   },
   optimization: {
     minimize: true,
@@ -82,12 +65,10 @@ module.exports = {
       new OptimizeCSSAssetsPlugin(),
     ],
   },
-  plugins: process.env.ALL_IN_JS
-    ? [...pluginsSettings]
-    : [
-        ...pluginsSettings,
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].styles.min.css',
-        }),
-      ],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'index.html'),
+    }),
+  ],
 };
